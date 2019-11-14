@@ -1,0 +1,35 @@
+apply plugin: "java"
+
+repositories {
+    mavenCentral()
+
+    maven {
+        url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
+        content {
+            includeGroup 'org.bukkit'
+            includeGroup 'org.spigotmc'
+        }
+    }
+
+    maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
+    mavenLocal()
+}
+
+dependencies {
+    compileOnly "org.spigotmc:spigot-api:1.14.4-R0.1-SNAPSHOT"
+}
+
+task createJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'org.loremipsum.pippleflip.Pippleflip',
+        'Manifest-Version': '1.0'
+    }
+
+    destinationDir = file("$rootDir/server/plugins")
+    from sourceSets.main.allSource
+}
+
+task runServer(type: Exec) {
+    dependsOn createJar
+    commandLine "./run_server.sh"
+}
