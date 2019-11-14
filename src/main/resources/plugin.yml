@@ -1,0 +1,13 @@
+main: org.loremipsum.pippleflip.Pippleflip
+name: Pippleflip
+version: 1.0.0
+description: Main management plugin for the official Inter-Actief Minecraft server.
+authors:
+  - EyeDevelop
+
+commands:
+  pippeflip:
+    aliases:
+      - pf
+    description: The main plugin command.
+    usage: "Do /pippeflip help for the plugin help."
