@@ -1,19 +1,21 @@
 #!/bin/bash
 
 setup() {
-  mkdir server
-  cp lib/Spigot-1.14.4*.jar server/
+  mkdir server || true
+  cp lib/Spigot-1.14.4-94af569-20190911-0820.jar server/
   cat > server/run_server.sh <<EOF
 #!/bin/bash
-java -Xmx2G -Xms2G -jar Spigot-1.14.4*.jar nogui
+java -Xmx2G -Xms2G -jar Spigot-1.14.4-94af569-20190911-0820.jar nogui
 EOF
+  echo "eula=true" > server/eula.txt
   chmod +x server/run_server.sh
 }
 
 # Create server if it doesn't exist.
-if [[ ! -d server ]]; then
+if [[ ! -f "server/run_server.sh" ]]; then
   setup
 fi
 
 # Start the server.
-server/run_server.sh
+cd server/
+bash run_server.sh
